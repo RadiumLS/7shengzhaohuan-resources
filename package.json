@@ -1,0 +1,19 @@
+{
+  "name": "7shengzhaohuan-resource",
+  "version": "1.0.0",
+  "description": "从米游社获取七圣召唤的卡牌资源",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RadiumLS/7shengzhaohuan-resources.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RadiumLS/7shengzhaohuan-resources/issues"
+  },
+  "homepage": "https://github.com/RadiumLS/7shengzhaohuan-resources#readme"
+}
