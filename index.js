@@ -91,6 +91,7 @@ const weaponTypeMap = {
   '205': 'Polearm', // 长柄武器
 };
 const costTypeMap = {
+  '1': 'energy',
   '13': 'pryo', // 火
   '12': 'hydro', // 水
   '15': 'geo', // 岩
@@ -100,6 +101,8 @@ const costTypeMap = {
   '17': 'anemo', // 风
   '3': 'matching',
   '10': 'unaligned',
+  // 但是秘传牌被视作有一个额外cost, 但是工程中暂时预计通过其他方式处理
+  '6': 'arcane', // 秘传
 }
 
 /**
@@ -144,7 +147,7 @@ const getCharCardJSON = async function() {
       iconSmall: oneData.basic.icon_small,
       wiki: oneData.basic.wiki_url,
       health: oneData.hp,
-      engry: oneData.skill_cost,
+      energy: oneData.skill_cost,
       element: elementMap[oneData.element]
     });
   }
@@ -168,7 +171,7 @@ const getActionCardJSON = async function(roleIds = []) {
       wiki: oneData.basic.wiki_url,
       type: actionCardTypeMap[oneData.card_tag[0]] || 'event',
       weaponType: oneData.card_tag[0] === '3' ? (weaponTypeMap[oneData.card_tag[1]] || 'other') : undefined,
-      engry: oneData.engry_cost,
+      // energy: oneData.energy_cost,
       cost: [],
     }
     if(oneData.skill_element) {
@@ -178,10 +181,13 @@ const getActionCardJSON = async function(roleIds = []) {
       });
     }
     if(oneData.skill_element2) {
-      oneCard.cost.push({
-        type: costTypeMap[oneData.skill_element2],
-        cost: oneData.skill_value2,
-      });
+      const costType = costTypeMap[oneData.skill_element2];
+      if(costType !== 'arcane') {
+        oneCard.cost.push({
+          type: costTypeMap[oneData.skill_element2],
+          cost: oneData.skill_value2,
+        });
+      }
     }
     actionCards.push(oneCard);
   }
