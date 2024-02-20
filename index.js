@@ -209,6 +209,66 @@ const downloadIcon = async function(url, path) {
     writer.on('error', reject)
   })
 }
+const downloadAllDiceIcon = async function() {
+  const diceUrlMap = {
+    // 火
+    pryo: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Pryo_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/1/13/Icon_TCG_Pyro.png"
+    },
+    // 水
+    hydro: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Hydro_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/9/98/Icon_TCG_Hydro.png"
+    },
+    // 岩
+    geo: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Geo_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/b/b2/Icon_TCG_Geo.png"
+    },
+    // 雷
+    electro: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Electro_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/7/7f/Icon_TCG_Electro.png"
+    },
+    // 草
+    dendro: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Dendro_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/d/dc/Icon_TCG_Dendro.png"
+    },
+    // 冰
+    cryo: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/3/36/Genius_Invokation_TCG_Cryo_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/a/a6/Icon_TCG_Cryo.png"
+    },
+    // 风
+    anemo: {
+      // bg: "https://static.wikia.nocookie.net/gensin-impact/images/e/e4/Genius_Invokation_TCG_Anemo_Cost.png",
+      el: "https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Icon_TCG_Anemo.png"
+    },
+    // 同色骰
+    matching: {
+      bg: "https://static.wikia.nocookie.net/gensin-impact/images/b/b1/Genius_Invokation_TCG_Matching_Cost.png",
+    },
+    // 无颜色要求骰
+    unaligned: {
+      bg: "https://static.wikia.nocookie.net/gensin-impact/images/2/21/Genius_Invokation_TCG_Unaligned_Cost.png",
+    },
+    omni: {
+      bg: "https://static.wikia.nocookie.net/gensin-impact/images/5/56/Icon_TCG_Omni_Element.png"
+    }
+  }
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  for(const [key, obj] of Object.entries(diceUrlMap)) {
+    if(obj.bg) {
+      await downloadIcon(obj.bg, path.resolve(__dirname, './dices', `${key}_bg.png`))
+    }
+    if(obj.el) {
+      await downloadIcon(obj.el, path.resolve(__dirname, './dices', `${key}_el.png`))
+    }
+  }
+}
 
 const main = async function() {
   // const { charCards, actionCards } = await getCardList();
